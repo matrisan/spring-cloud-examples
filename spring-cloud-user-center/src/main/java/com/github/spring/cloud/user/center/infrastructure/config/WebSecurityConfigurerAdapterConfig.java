@@ -1,4 +1,4 @@
-package com.github.spring.cloud.user.center.application.service;
+package com.github.spring.cloud.user.center.infrastructure.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

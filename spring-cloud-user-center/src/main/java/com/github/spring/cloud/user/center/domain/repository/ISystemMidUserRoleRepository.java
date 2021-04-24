@@ -31,6 +31,9 @@ public interface ISystemMidUserRoleRepository extends JpaRepository<SystemMidUse
     @NotNull
     SystemMidUserRoleDO save(@NotNull SystemMidUserRoleDO midUserRole);
 
+    int deleteAllByUserId(long userId);
+
+
     /**
      * 用户 ID
      *

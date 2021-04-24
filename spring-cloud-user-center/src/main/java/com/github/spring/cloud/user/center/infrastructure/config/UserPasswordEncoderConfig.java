@@ -1,7 +1,5 @@
 package com.github.spring.cloud.user.center.infrastructure.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,13 +27,6 @@ import java.util.Map;
 @Configuration
 @RequiredArgsConstructor
 public class UserPasswordEncoderConfig {
-
-    private final ObjectMapper objectMapper;
-
-    @PostConstruct
-    public void init() {
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-    }
 
     @Bean
     public PasswordEncoder createDelegatingPasswordEncoder() {

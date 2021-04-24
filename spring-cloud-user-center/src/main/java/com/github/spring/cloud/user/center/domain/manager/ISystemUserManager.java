@@ -1,9 +1,12 @@
 package com.github.spring.cloud.user.center.domain.manager;
 
 import com.github.spring.cloud.user.center.domain.entity.SystemUserDO;
+import com.github.spring.cloud.user.center.interfaces.dto.UserCreateCommandDTO;
+import com.github.spring.cloud.user.center.interfaces.dto.UserSaveResultDTO;
+import com.github.spring.cloud.user.center.interfaces.dto.UserUpdateCommandDTO;
 
 /**
- * TODO
+ * 用户管理类
  * <p>
  * create in 2021/4/17 4:37 下午
  *
@@ -65,9 +68,17 @@ public interface ISystemUserManager {
      * 同时将用户的 id,用户名,手机号码,密码存入 缓存
      *
      * @param simpleUser 用户信息
-     * @return SystemUserDO
+     * @return UserSaveResultDTO
      */
-    SystemUserDO saveSimpleUser(SystemUserDO simpleUser);
+    UserSaveResultDTO createSimpleUser(UserCreateCommandDTO simpleUser);
+
+    /**
+     * 更新用户
+     *
+     * @param simpleUser 用户
+     * @return UserSaveResultDTO
+     */
+    UserSaveResultDTO updateSimpleUser(UserUpdateCommandDTO simpleUser);
 
     /**
      * 删除用户

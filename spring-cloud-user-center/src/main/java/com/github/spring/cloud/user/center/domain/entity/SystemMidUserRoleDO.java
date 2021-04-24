@@ -45,6 +45,11 @@ public class SystemMidUserRoleDO extends BaseEntity {
 
     private static final long serialVersionUID = 1758002168520712592L;
 
+    public SystemMidUserRoleDO(Long userId, Long roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

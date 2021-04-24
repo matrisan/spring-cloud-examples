@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
@@ -63,6 +64,7 @@ import static com.github.spring.cloud.user.center.domain.common.OrmTableName.SYS
         })
 @Audited
 @EntityListeners(AuditingEntityListener.class)
+@SuppressWarnings("unused")
 public class SystemUserDO extends BaseEntity implements UserDetails {
 
     private static final long serialVersionUID = 6949655530047745714L;
@@ -114,19 +116,28 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        if (ObjectUtils.isEmpty(accountNonExpired)) {
+            return true;
+        }
+        return accountNonExpired.before(new Date());
     }
 
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        if (ObjectUtils.isEmpty(accountNonLocked)) {
+            return true;
+        }
+        return accountNonLocked.before(new Date());
     }
 
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        if (ObjectUtils.isEmpty(credentialsNonExpired)) {
+            return true;
+        }
+        return credentialsNonExpired.before(new Date());
     }
 
     @JsonIgnore

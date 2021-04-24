@@ -44,7 +44,7 @@ public class RoleDetailManagerImpl implements IRoleDetailManager {
     @Cacheable(key = "'code:' + #a0")
     @Override
     public SystemRoleDO findByRoleCode(String roleCode) {
-        return null;
+        return roleRepository.findByRoleCode(roleCode);
     }
 
     @Override

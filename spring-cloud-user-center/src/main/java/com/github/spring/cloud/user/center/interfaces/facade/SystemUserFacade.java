@@ -35,7 +35,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @PreAuthorize("hasAnyRole('ROLE_ROOT')")
-public class UserManagerController {
+public class SystemUserFacade {
 
     @Resource
     private ISystemUserService service;

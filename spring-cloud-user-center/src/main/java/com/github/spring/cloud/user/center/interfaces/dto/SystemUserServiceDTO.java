@@ -72,7 +72,8 @@ public class SystemUserServiceDTO {
                 .email(email)
                 .build();
 
-        return userManager.saveSimpleUser(user);
+//        return userManager.createSimpleUser(user);
+        return null;
     }
 
 

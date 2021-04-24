@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.NotBlank;
 
 /**
- * TODO
+ * 初始化用户
  * <p>
  * create in 2021/4/13 10:28 下午
  *
@@ -22,10 +22,13 @@ import javax.validation.constraints.NotBlank;
 @Validated
 @Component
 @ConfigurationProperties(prefix = "system.user.init")
-public class PropertiesConfig {
+public class SystemInitUserConfig {
 
     @NotBlank
     private String username;
+
+    @NotBlank
+    private String password;
 
     @NotBlank
     private String mobile;

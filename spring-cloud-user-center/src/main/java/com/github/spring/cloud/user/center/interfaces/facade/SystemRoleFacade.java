@@ -31,23 +31,23 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @PreAuthorize("hasAnyRole('ROLE_ROOT')")
-public class RoleManagerController {
+public class SystemRoleFacade {
 
     public ResultVO<Page<RoleQueryDTO>> findAllRoles(RoleQueryDTO query, Pageable pageable) {
         return ResultVO.success();
     }
 
-    @PostMapping("user")
+    @PostMapping("role")
     public ResultVO<RoleSaveResultDTO> createUser(@RequestBody @Valid RoleCreateCommandDTO user) {
         return ResultVO.success();
     }
 
-    @PutMapping("user")
+    @PutMapping("role")
     public ResultVO<RoleSaveResultDTO> updateUser(@RequestBody @Valid RoleUpdateCommandDTO user) {
         return ResultVO.success();
     }
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("role/{id}")
     public ResultVO<Void> deleteById(@PathVariable SystemUserDO user) {
         return ResultVO.success();
     }

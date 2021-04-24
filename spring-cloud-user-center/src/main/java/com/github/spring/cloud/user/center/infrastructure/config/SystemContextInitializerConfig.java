@@ -8,6 +8,7 @@ import com.github.spring.cloud.user.center.domain.repository.ISystemMidUserRoleR
 import com.github.spring.cloud.user.center.domain.repository.ISystemUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -31,7 +32,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class SystemContextInitializerConfig implements CommandLineRunner {
 
-    private final PropertiesConfig propertiesConfig;
+    private final SystemInitUserConfig systemInitUserConfig;
 
     private final ISystemUserRepository userRepository;
 
@@ -49,17 +50,18 @@ public class SystemContextInitializerConfig implements CommandLineRunner {
     }
 
     private SystemRoleDO saveRoleIfNotExist() {
-        if (!roleRepository.existsByRoleCode(ROOT_CODE)) {
-            SystemRoleDO role = roleRepository.save(getRole());
+        SystemRoleDO role = roleRepository.findByRoleCode(ROOT_CODE);
+        if (ObjectUtils.isEmpty(role)) {
+            role = roleRepository.save(getRole());
             log.debug("初始化角色:{}", role);
             return role;
         }
-        return roleRepository.findByRoleCode(ROOT_CODE);
+        return role;
     }
 
     private void saveUserIfNotExist(SystemRoleDO role) {
         SystemUserDO user;
-        if (!userRepository.existsByUsername(propertiesConfig.getUsername())) {
+        if (!userRepository.existsByUsername(systemInitUserConfig.getUsername())) {
             user = getUser();
             user.setRoles(Collections.singleton(role));
             user = userRepository.save(getUser());
@@ -80,9 +82,10 @@ public class SystemContextInitializerConfig implements CommandLineRunner {
 
     private SystemUserDO getUser() {
         return SystemUserDO.builder()
-                .username(propertiesConfig.getUsername())
-                .mobile(propertiesConfig.getMobile())
-                .email(propertiesConfig.getEmail())
+                .username(systemInitUserConfig.getUsername())
+                .password(systemInitUserConfig.getPassword())
+                .mobile(systemInitUserConfig.getMobile())
+                .email(systemInitUserConfig.getEmail())
                 .password(PASSWORD).build();
     }
 

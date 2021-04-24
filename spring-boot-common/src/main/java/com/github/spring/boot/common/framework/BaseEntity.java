@@ -30,8 +30,6 @@ public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -2191753221757519036L;
 
-
-
     @Column(columnDefinition = "VARCHAR(100) COMMENT '备注'")
     private String note;
 
