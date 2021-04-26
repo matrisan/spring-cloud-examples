@@ -1,4 +1,4 @@
-package com.example.spring.cloud.statistics;
+package com.github.spring.cloud.statistics;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
