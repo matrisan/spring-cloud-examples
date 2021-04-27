@@ -2,6 +2,7 @@ package com.github.spring.cloud.user.center.domain.repository;
 
 import com.github.spring.cloud.user.center.domain.entity.SystemRoleDO;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -24,12 +25,14 @@ public interface ISystemRoleRepository extends JpaRepository<SystemRoleDO, Long>
      * @param roleCode 角色的 ID
      * @return 角色
      */
+    @Cacheable(key = "'code:' + #a0")
     SystemRoleDO findByRoleCode(String roleCode);
 
     /**
      * @param roleCoDe
      * @return
      */
+    @Cacheable(key = "'exists:code:' + #a0")
     boolean existsByRoleCode(String roleCoDe);
 
     /**

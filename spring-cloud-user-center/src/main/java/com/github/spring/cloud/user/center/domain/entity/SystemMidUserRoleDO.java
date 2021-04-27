@@ -18,6 +18,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 /**
@@ -39,7 +40,7 @@ import javax.persistence.Table;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "system_mid_user_role")
+@Table(name = "system_mid_user_role", indexes = {@Index(name = "idx_user_id", columnList = "user_id")})
 @EntityListeners(AuditingEntityListener.class)
 public class SystemMidUserRoleDO extends BaseEntity {
 

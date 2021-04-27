@@ -72,6 +72,7 @@ public class SystemRoleDO extends BaseEntity implements GrantedAuthority {
     @JsonBackReference
     private Collection<SystemUserDO> users;
 
+
     @JsonIgnore
     @Override
     public String getAuthority() {
