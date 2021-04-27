@@ -25,6 +25,6 @@ public class NewUsernameValidator implements ConstraintValidator<NewUsername, St
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return !repository.existsByUsername(value);
+        return !repository.existsByUsernameEquals(value);
     }
 }

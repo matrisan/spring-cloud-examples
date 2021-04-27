@@ -73,7 +73,7 @@ public class SystemUserDO extends BaseEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(20) COMMENT '用户名'")
+    @Column(columnDefinition = "VARCHAR(50) COMMENT '用户名'")
     private String username;
 
     @Column(columnDefinition = "CHAR(20) COMMENT '手机号码'")

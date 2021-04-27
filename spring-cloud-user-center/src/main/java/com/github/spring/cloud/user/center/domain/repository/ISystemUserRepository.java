@@ -36,8 +36,8 @@ public interface ISystemUserRepository extends JpaRepository<SystemUserDO, Long>
      * @param username 用户名
      * @return boolean
      */
-    @Cacheable(key = "'exist:username:' + #a0", unless = "!#result == null")
-    boolean existsByUsername(String username);
+    @Cacheable(key = "'exist:username:' + #a0", unless = "#result != null")
+    boolean existsByUsernameEquals(String username);
 
     /**
      * 根据手机号码判断欧诺个户是否存在
@@ -45,8 +45,8 @@ public interface ISystemUserRepository extends JpaRepository<SystemUserDO, Long>
      * @param mobile 手机号码
      * @return boolean
      */
-    @Cacheable(key = "'exist:mobile:' + #a0", unless = "!#result == null")
-    boolean existsByMobile(String mobile);
+    @Cacheable(key = "'exist:mobile:' + #a0", unless = "#result != null")
+    boolean existsByMobileEquals(String mobile);
 
     /**
      * 查找所有的用户
@@ -63,7 +63,7 @@ public interface ISystemUserRepository extends JpaRepository<SystemUserDO, Long>
      *
      * @return String
      */
-    @Cacheable(key = "'current:password:' + #principal.username", unless = "!#result == null")
+    @Cacheable(key = "'password:username:' + {#principal.username}", condition = "#result != null", sync = true)
     @Query("SELECT user.password FROM SystemUserDO AS user WHERE user.username = :#{principal.username}")
     String findCurrentPassword();
 
@@ -122,14 +122,25 @@ public interface ISystemUserRepository extends JpaRepository<SystemUserDO, Long>
     void updateLastLoginDate();
 
 
+    /**
+     * 保存用户信息
+     *
+     * @param simpleUser 用户信息
+     * @return SystemUserDO
+     */
     @Caching(put = {
             @CachePut(key = "'id:' + #result.id"),
             @CachePut(key = "'username:' + #result.username"),
             @CachePut(key = "'mobile:' + #result.mobile")
     })
     @Override
-    SystemUserDO save(SystemUserDO simpleUser);
+    @NotNull SystemUserDO save(@NotNull SystemUserDO simpleUser);
 
+    /**
+     * 删除用户
+     *
+     * @param simpleUser 用户信息
+     */
     @Caching(evict = {
             @CacheEvict(key = "'id:' + #a0.id"),
             @CacheEvict(key = "'username:' + #a0.username"),

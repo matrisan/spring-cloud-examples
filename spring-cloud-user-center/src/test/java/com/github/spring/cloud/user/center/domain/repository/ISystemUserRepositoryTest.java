@@ -24,7 +24,7 @@ class ISystemUserRepositoryTest {
 
     @Test
     void existsByUsername() {
-        boolean root = repository.existsByUsername("root");
+        boolean root = repository.existsByUsernameEquals("root");
         Assertions.assertTrue(root);
     }
 

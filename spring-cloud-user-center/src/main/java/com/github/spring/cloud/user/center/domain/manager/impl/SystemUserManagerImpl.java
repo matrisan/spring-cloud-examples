@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 /**
- * TODO
+ * 用户管理类
  * <p>
  * create in 2021/4/17 4:43 下午
  *
@@ -37,12 +37,12 @@ public class SystemUserManagerImpl implements ISystemUserManager {
 
     @Override
     public boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
+        return userRepository.existsByUsernameEquals(username);
     }
 
     @Override
     public boolean existsByMobile(String mobile) {
-        return userRepository.existsByMobile(mobile);
+        return userRepository.existsByMobileEquals(mobile);
     }
 
     @Override

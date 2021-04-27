@@ -35,7 +35,7 @@ public class NewOrUnchangedMobileValidator implements ConstraintValidator<NewOrU
             if (StringUtils.equals(user.getMobile(), value.getMobile())) {
                 return true;
             }
-            return !repository.existsByMobile(value.getMobile());
+            return !repository.existsByMobileEquals(value.getMobile());
         }
         return false;
     }

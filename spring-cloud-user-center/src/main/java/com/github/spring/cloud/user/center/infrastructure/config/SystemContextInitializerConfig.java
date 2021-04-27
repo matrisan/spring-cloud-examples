@@ -61,7 +61,7 @@ public class SystemContextInitializerConfig implements CommandLineRunner {
 
     private void saveUserIfNotExist(SystemRoleDO role) {
         SystemUserDO user;
-        if (!userRepository.existsByUsername(systemInitUserConfig.getUsername())) {
+        if (!userRepository.existsByUsernameEquals(systemInitUserConfig.getUsername())) {
             user = getUser();
             user.setRoles(Collections.singleton(role));
             user = userRepository.save(getUser());

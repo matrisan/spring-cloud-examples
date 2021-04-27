@@ -41,6 +41,12 @@ public interface ISystemUserMapper {
      * @param createCommand 更新信息
      * @return SystemUserDO
      */
+    @Mapping(target = "roles", ignore = true)
+    @Mapping(target = "lastLoginDate", ignore = true)
+    @Mapping(target = "credentialsNonExpired", ignore = true)
+    @Mapping(target = "credentialsNonExpired", ignore = true)
+    @Mapping(target = "accountNonLocked", ignore = true)
+    @Mapping(target = "accountNonExpired", ignore = true)
     SystemUserDO from(UserUpdateCommandDTO createCommand);
 
     /**

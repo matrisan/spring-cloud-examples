@@ -25,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class UserSaveResultDTO {
 
+    private Long id;
+
     private String username;
 
     private String mobile;

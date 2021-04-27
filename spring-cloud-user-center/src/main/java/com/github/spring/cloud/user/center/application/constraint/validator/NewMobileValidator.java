@@ -25,6 +25,6 @@ public class NewMobileValidator implements ConstraintValidator<NewMobile, String
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return !repository.existsByMobile(value);
+        return !repository.existsByMobileEquals(value);
     }
 }
